@@ -9,6 +9,7 @@ public final class SItems implements ContentList{
     public static Item
     stone,
 
+    tinRaw,
     tinDust,
     tinIngot,
     tinPlate,
@@ -25,6 +26,10 @@ public final class SItems implements ContentList{
         }};
 
         // // // //
+
+        tinRaw = new Dust("tin-raw", Accents.tin){{
+
+        }};
 
         tinDust = new Dust("tin-dust", Accents.tin){{
 

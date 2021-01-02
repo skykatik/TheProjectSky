@@ -41,13 +41,6 @@ public final class SkyLoader extends Mod{
                 Log.level = level;
                 player.sendMessage("[lightgray]Level set to [orange]" + level);
             });
-
-            handler.<Player>register("deb", "Toggle logging level.", (args, player) -> {
-                Tile t = world.tileWorld(player.mouseX, player.mouseY);
-                for(Building b : t.build.proximity){
-                    player.sendMessage(Strings.format("i: @ | x: @ | y: @", t.build.proximity.indexOf(b), b.tileX(), b.tileY()));
-                }
-            });
         }
     }
 }

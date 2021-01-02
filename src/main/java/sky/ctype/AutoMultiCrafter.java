@@ -1,5 +1,6 @@
 package sky.ctype;
 
+import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.math.Mathf;
@@ -28,6 +29,7 @@ public class AutoMultiCrafter extends Block{
 
     public Color flameColor = Color.valueOf("ffc999");
     public TextureRegion topRegion;
+    public TextureRegion rotator;
     public float craftTime = 80;
     public Effect craftEffect = Fx.none;
     public Effect updateEffect = Fx.none;
@@ -87,7 +89,13 @@ public class AutoMultiCrafter extends Block{
 
         drawer.load(this);
 
-        topRegion = atlas.find(name + "-top");
+        if(atlas.has(name + "-top")){ // todo
+            topRegion = atlas.find(name + "-top");
+        }
+
+        if(atlas.has(name + "-rotator")){
+            rotator = Core.atlas.find(name + "-rotator");
+        }
     }
 
     @Override
