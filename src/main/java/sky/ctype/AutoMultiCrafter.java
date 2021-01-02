@@ -1,8 +1,7 @@
 package sky.ctype;
 
-import arc.Core;
 import arc.graphics.Color;
-import arc.graphics.g2d.*;
+import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.scene.style.TextureRegionDrawable;
 import arc.scene.ui.layout.Table;
@@ -17,12 +16,10 @@ import mindustry.type.*;
 import mindustry.ui.*;
 import mindustry.world.Block;
 import mindustry.world.consumers.ConsumeItemDynamic;
-import mindustry.world.draw.DrawBlock;
 import mindustry.world.meta.*;
 import sky.draw.forward.ForwardDrawBlock;
 import sky.type.*;
 
-import static arc.Core.atlas;
 import static mindustry.Vars.*;
 
 public class AutoMultiCrafter extends Block{

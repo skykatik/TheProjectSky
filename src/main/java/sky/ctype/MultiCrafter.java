@@ -30,6 +30,7 @@ import java.util.*;
 import static arc.Core.atlas;
 import static mindustry.Vars.*;
 
+@Deprecated
 public class MultiCrafter extends Block{
     public float[] capacities;
 

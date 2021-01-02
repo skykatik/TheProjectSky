@@ -22,13 +22,13 @@ public final class SItems implements ContentList{
     public void load(){
 
         stone = new Item("stone", Accents.stone){{
-
+            cost = 0.7f;
         }};
 
         // // // //
 
         tinRaw = new Dust("tin-raw", Accents.tin){{
-
+            hardness = 1;
         }};
 
         tinDust = new Dust("tin-dust", Accents.tin){{
