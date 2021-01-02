@@ -5,8 +5,10 @@ import mindustry.type.Item;
 import sky.Accents;
 import sky.ctype.Dust;
 
-public class SItems implements ContentList{
+public final class SItems implements ContentList{
     public static Item
+    stone,
+
     tinDust,
     tinIngot,
     tinPlate,
@@ -17,6 +19,12 @@ public class SItems implements ContentList{
 
     @Override
     public void load(){
+
+        stone = new Item("stone", Accents.stone){{
+
+        }};
+
+        // // // //
 
         tinDust = new Dust("tin-dust", Accents.tin){{
 

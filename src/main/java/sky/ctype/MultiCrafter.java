@@ -1,15 +1,17 @@
 package sky.ctype;
 
+import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.math.Mathf;
-import arc.scene.style.TextureRegionDrawable;
+import arc.scene.style.*;
 import arc.scene.ui.layout.Table;
 import arc.struct.*;
 import arc.struct.EnumSet;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.content.*;
+import mindustry.core.UI;
 import mindustry.ctype.UnlockableContent;
 import mindustry.entities.*;
 import mindustry.gen.*;
@@ -21,17 +23,18 @@ import mindustry.world.blocks.ItemSelection;
 import mindustry.world.consumers.*;
 import mindustry.world.draw.DrawBlock;
 import mindustry.world.meta.*;
-import mindustry.world.modules.ConsumeModule;
 import sky.type.*;
 
 import java.util.*;
-import java.util.function.Function;
 
+import static arc.Core.atlas;
 import static mindustry.Vars.*;
 
 public class MultiCrafter extends Block{
     public float[] capacities;
 
+    public Color flameColor = Color.valueOf("ffc999");
+    public TextureRegion topRegion;
     public float craftTime = 80;
     public Effect craftEffect = Fx.none;
     public Effect updateEffect = Fx.none;
@@ -68,9 +71,7 @@ public class MultiCrafter extends Block{
         }
 
         if(plans.contains(o -> o.getLiquid() != null)){
-            Log.info("a");
             consumes.add(new ConsumeLiquidDynamic((MultiCrafterBuild e) -> plans.get(1).liquidRequirements));
-            Log.info("> @", consumes.get(ConsumeType.liquid));
         }
     }
 
@@ -102,7 +103,9 @@ public class MultiCrafter extends Block{
     public void load(){
         super.load();
 
-        // drawer.load(this);
+        drawer.load(this);
+
+        topRegion = atlas.find(name + "-top");
     }
 
     @Override
@@ -142,7 +145,7 @@ public class MultiCrafter extends Block{
 
     @Override
     public TextureRegion[] icons(){
-        return new TextureRegion[]{this.region};
+        return new TextureRegion[]{region};
     }
 
     @Override
@@ -151,27 +154,40 @@ public class MultiCrafter extends Block{
     }
 
     public static class OutputPlan{
-        public final LiquidStack liquidStack;
-        public final ItemStack itemStack;
+        public LiquidStack liquidStack;
+        public ItemStack itemStack;
 
-        public ItemStack[] itemRequirements;
-        public LiquidStack[] liquidRequirements;
-        public final float time;
+        public ItemStack[] itemRequirements = ItemStack.empty;
+        public LiquidStack[] liquidRequirements = ForwardLiquidStack.empty;
+        public float time;
 
-        public OutputPlan(ItemStack itemStack, ItemStack[] itemRequirements, LiquidStack[] liquidRequirements, float time){
-            this.itemStack = Objects.requireNonNull(itemStack);
-            this.liquidStack = null;
-            this.itemRequirements = itemRequirements;
-            this.liquidRequirements = liquidRequirements;
-            this.time = time;
+        public static OutputPlan create(){
+            return new OutputPlan();
         }
 
-        public OutputPlan(LiquidStack liquidStack, ItemStack[] itemRequirements, LiquidStack[] liquidRequirements, float time){
-            this.liquidStack = Objects.requireNonNull(liquidStack);
-            this.itemStack = null;
+        public OutputPlan liquidStack(LiquidStack liquidStack){
+            this.liquidStack = liquidStack;
+            return this;
+        }
+
+        public OutputPlan itemStack(ItemStack itemStack){
+            this.itemStack = itemStack;
+            return this;
+        }
+
+        public OutputPlan itemRequirements(ItemStack... itemRequirements){
             this.itemRequirements = itemRequirements;
+            return this;
+        }
+
+        public OutputPlan liquidRequirements(LiquidStack... liquidRequirements){
             this.liquidRequirements = liquidRequirements;
+            return this;
+        }
+
+        public OutputPlan time(float time){
             this.time = time;
+            return this;
         }
 
         public Item getItem(){
@@ -202,6 +218,22 @@ public class MultiCrafter extends Block{
         @Override
         public void draw(){
             Draw.rect(region, x, y, block.rotate ? rotdeg() : 0.0F);
+
+            if(progress > 0f && flameColor.a > 0.001f){
+                float g = 0.3f;
+                float r = 0.06f;
+                float cr = Mathf.random(0.1f);
+
+                Draw.alpha(((1f - g) + Mathf.absin(Time.time, 8f, g) + Mathf.random(r) - r) * progress);
+
+                Draw.tint(flameColor);
+                Fill.circle(x, y, 3f + Mathf.absin(Time.time, 5f, 2f) + cr);
+                Draw.color(1f, 1f, 1f, progress);
+                Draw.rect(topRegion, x, y);
+                Fill.circle(x, y, 1.9f + Mathf.absin(Time.time, 5f, 1f) + cr);
+
+                Draw.color();
+            }
         }
 
         @Override
@@ -269,6 +301,7 @@ public class MultiCrafter extends Block{
                         liquids.add(plan.getLiquid(), plan.getLiquidCount());
                     }
 
+                    craftEffect.at(x, y);
                     progress = 0f;
                     consume();
                 }

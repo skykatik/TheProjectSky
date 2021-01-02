@@ -8,10 +8,12 @@ import mindustry.gen.Player;
 import mindustry.mod.Mod;
 import sky.content.*;
 
+import static mindustry.Vars.*;
+
 public final class SkyLoader extends Mod{
     private ContentList[] content = {
-            new SBlocks(),
             new SItems(),
+            new SBlocks(),
             new SOres()
     };
 
@@ -25,7 +27,7 @@ public final class SkyLoader extends Mod{
     @Override
     public void registerClientCommands(CommandHandler handler){
 
-        if(!Vars.headless && !Vars.mobile){
+        if(!headless && !mobile){
             handler.<Player>register("log-level", "[debug/info/warn/err/none]", "Toggle logging level.", (args, player) -> {
                 LogLevel level;
                 try{
