@@ -2,3 +2,6 @@
 
 ## Installation
 
+## Features
+Multie blocks and two-input crafters
+
