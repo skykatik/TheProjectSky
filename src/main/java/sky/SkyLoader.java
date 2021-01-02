@@ -15,7 +15,8 @@ public final class SkyLoader extends Mod{
     private ContentList[] content = {
             new SItems(),
             new SBlocks(),
-            new SOres()
+            new SOres(),
+            new SPlanets()
     };
 
     @Override

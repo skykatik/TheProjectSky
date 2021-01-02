@@ -3,12 +3,13 @@ package sky.ctype;
 import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.math.Mathf;
-import arc.util.Time;
-import mindustry.gen.Sounds;
+import arc.util.*;
+import mindustry.gen.*;
 import mindustry.graphics.Drawf;
 
 public class AutoMultiSmelter extends AutoMultiCrafter{
     public Color flameColor = Color.valueOf("ffc999");
+    public TextureRegion topRegion;
 
     public AutoMultiSmelter(String name){
         super(name);

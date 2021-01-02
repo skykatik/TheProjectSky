@@ -25,11 +25,9 @@ import static mindustry.Vars.*;
 public class AutoMultiCrafter extends Block{
     public float[] capacities;
 
-    public TextureRegion topRegion;
     public float craftTime = 80;
     public Effect craftEffect = Fx.none;
     public Effect updateEffect = Fx.none;
-    public float updateEffectChance = 0.04f;
 
     public ForwardDrawBlock drawer = new ForwardDrawBlock();
     public Seq<OutputPlan> plans = new Seq<>();
