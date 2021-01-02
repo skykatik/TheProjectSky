@@ -9,20 +9,16 @@ import arc.struct.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.content.Fx;
-import mindustry.ctype.UnlockableContent;
 import mindustry.entities.Effect;
 import mindustry.gen.*;
 import mindustry.graphics.Pal;
 import mindustry.type.*;
 import mindustry.ui.*;
 import mindustry.world.Block;
-import mindustry.world.blocks.ItemSelection;
 import mindustry.world.consumers.ConsumeItemDynamic;
 import mindustry.world.draw.DrawBlock;
 import mindustry.world.meta.*;
 import sky.type.*;
-
-import java.util.Objects;
 
 import static arc.Core.atlas;
 import static mindustry.Vars.*;
@@ -149,6 +145,15 @@ public class AutoMultiCrafter extends Block{
 
         public static OutputPlan create(){
             return new OutputPlan();
+        }
+
+        public static DistributeMultiCrafter.IndexedOutputPlan indexed(){
+            return new DistributeMultiCrafter.IndexedOutputPlan();
+        }
+
+        //for casting
+        public <T extends OutputPlan> T as(Class<T> clazz){
+            return clazz.cast(this);
         }
 
         public OutputPlan liquidStack(LiquidStack liquidStack){

@@ -297,7 +297,9 @@ public class MultiCrafter extends Block{
                         for(int i = 0; i < plan.getItems(); i++){
                             offload(plan.getItem());
                         }
-                    }else if(plan.getLiquid() != null){
+                    }
+
+                    if(plan.getLiquid() != null){
                         liquids.add(plan.getLiquid(), plan.getLiquidCount());
                     }
 
