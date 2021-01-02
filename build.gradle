@@ -1,0 +1,48 @@
+plugins{
+    id 'java'
+}
+
+repositories{
+    mavenCentral()
+    maven{url 'https://www.jitpack.io'}
+}
+
+ext{
+    mindustryVersion = 'v122'
+    sdkVersion = '30'
+    sdkRoot = System.getenv("ANDROID_HOME")
+
+    doExec = {cmd ->
+        def proc = cmd.execute(null, new File("$buildDir/libs"))
+        proc.waitForProcessOutput(System.out, System.err)
+    }
+}
+
+dependencies{
+    compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
+    compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
+}
+
+allprojects{
+    tasks.withType(JavaCompile){
+        if(JavaVersion.current() != JavaVersion.VERSION_1_8){
+            options.compilerArgs += ['--release', '8']
+        }
+    }
+}
+
+task jarAndroid{
+    dependsOn "jar"
+
+    doLast{
+        def files = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File("$sdkRoot/platforms/android-$sdkVersion/android.jar")])
+        def dependencies = files.collect{"--classpath $it.path"}.join(" ")
+
+        doExec("cmd.exe c/ d8 $dependencies --min-api 14 --output ${project.archivesBaseName}Android.jar ${project.archivesBaseName}Desktop.jar")
+    }
+}
+
+jar{
+    archiveFileName = "${project.archivesBaseName}Desktop.jar"
+    from{configurations.runtimeClasspath.collect{it.isDirectory() ? it : zipTree(it)}}
+}

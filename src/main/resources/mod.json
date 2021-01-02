@@ -1,0 +1,9 @@
+{
+  "name": "the-project-sky",
+  "displayName": "[sky]The Project Sky",
+  "description": "Mod that adds a lot of resources and blocks.",
+  "author": "Skat",
+  "main": "sky.SkyLoader",
+  "version": "0.1-alpha",
+  "minGameVersion": 120
+}
