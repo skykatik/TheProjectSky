@@ -19,6 +19,7 @@ import mindustry.world.Block;
 import mindustry.world.consumers.ConsumeItemDynamic;
 import mindustry.world.draw.DrawBlock;
 import mindustry.world.meta.*;
+import sky.draw.forward.ForwardDrawBlock;
 import sky.type.*;
 
 import static arc.Core.atlas;
@@ -27,15 +28,13 @@ import static mindustry.Vars.*;
 public class AutoMultiCrafter extends Block{
     public float[] capacities;
 
-    public Color flameColor = Color.valueOf("ffc999");
     public TextureRegion topRegion;
-    public TextureRegion rotator;
     public float craftTime = 80;
     public Effect craftEffect = Fx.none;
     public Effect updateEffect = Fx.none;
     public float updateEffectChance = 0.04f;
 
-    public DrawBlock drawer = new DrawBlock();
+    public ForwardDrawBlock drawer = new ForwardDrawBlock();
     public Seq<OutputPlan> plans = new Seq<>();
 
     public AutoMultiCrafter(String name){
@@ -88,14 +87,6 @@ public class AutoMultiCrafter extends Block{
         super.load();
 
         drawer.load(this);
-
-        if(atlas.has(name + "-top")){ // todo
-            topRegion = atlas.find(name + "-top");
-        }
-
-        if(atlas.has(name + "-rotator")){
-            rotator = Core.atlas.find(name + "-rotator");
-        }
     }
 
     @Override
@@ -135,7 +126,7 @@ public class AutoMultiCrafter extends Block{
 
     @Override
     public TextureRegion[] icons(){
-        return new TextureRegion[]{region};
+        return drawer.icons(this);
     }
 
     @Override
@@ -153,15 +144,6 @@ public class AutoMultiCrafter extends Block{
 
         public static OutputPlan create(){
             return new OutputPlan();
-        }
-
-        public static DistributeMultiCrafter.IndexedOutputPlan indexed(){
-            return new DistributeMultiCrafter.IndexedOutputPlan();
-        }
-
-        //for casting
-        public <T extends OutputPlan> T as(Class<T> clazz){
-            return clazz.cast(this);
         }
 
         public OutputPlan liquidStack(LiquidStack liquidStack){
@@ -216,23 +198,7 @@ public class AutoMultiCrafter extends Block{
 
         @Override
         public void draw(){
-            Draw.rect(region, x, y, block.rotate ? rotdeg() : 0.0F);
-
-            if(progress > 0f && flameColor.a > 0.001f){
-                float g = 0.3f;
-                float r = 0.06f;
-                float cr = Mathf.random(0.1f);
-
-                Draw.alpha(((1f - g) + Mathf.absin(Time.time, 8f, g) + Mathf.random(r) - r) * progress);
-
-                Draw.tint(flameColor);
-                Fill.circle(x, y, 3f + Mathf.absin(Time.time, 5f, 2f) + cr);
-                Draw.color(1f, 1f, 1f, progress);
-                Draw.rect(topRegion, x, y);
-                Fill.circle(x, y, 1.9f + Mathf.absin(Time.time, 5f, 1f) + cr);
-
-                Draw.color();
-            }
+            drawer.draw(this);
         }
 
         @Override

@@ -3,10 +3,12 @@ package sky.content;
 import arc.struct.Seq;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
+import mindustry.gen.Sounds;
 import mindustry.type.*;
 import mindustry.world.Block;
 import mindustry.world.draw.DrawRotator;
 import sky.ctype.*;
+import sky.draw.forward.ForwardDrawRotator;
 
 import static mindustry.type.ItemStack.*;
 
@@ -19,7 +21,7 @@ public final class SBlocks implements ContentList{
     @Override
     public void load(){
 
-        tinSmelter = new AutoMultiCrafter("stone-smelter"){{
+        tinSmelter = new AutoMultiSmelter("stone-smelter"){{
             requirements(Category.crafting, with(SItems.stone, 130));
             plans = Seq.with(
                     OutputPlan.create().itemStack(new ItemStack(SItems.tinIngot, 1)).itemRequirements(with(SItems.tinRaw, 4)).time(35f),
@@ -51,7 +53,11 @@ public final class SBlocks implements ContentList{
             size = 1;
             itemCapacity = 3;
             hasPower = false;
-            craftEffect = Fx.pulverizeSmall;
+            drawer = new ForwardDrawRotator();
+            craftEffect = Fx.pulverize;
+            updateEffect = Fx.pulverizeSmall;
+            ambientSound = Sounds.grinding;
+            ambientSoundVolume = 0.025f;
         }};
     }
 }
