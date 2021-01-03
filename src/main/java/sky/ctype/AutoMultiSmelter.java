@@ -7,6 +7,9 @@ import arc.util.*;
 import mindustry.gen.*;
 import mindustry.graphics.Drawf;
 
+/**
+ * Multi smelter with special central region.
+ */
 public class AutoMultiSmelter extends AutoMultiCrafter{
     public Color flameColor = Color.valueOf("ffc999");
     public TextureRegion topRegion;

@@ -22,6 +22,9 @@ import sky.type.*;
 
 import static mindustry.Vars.*;
 
+/**
+ * Auto because he find configuration plan by input resources
+ */
 public class AutoMultiCrafter extends Block{
     public float[] capacities;
 

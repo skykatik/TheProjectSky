@@ -3,7 +3,6 @@ package sky.draw.forward;
 import arc.Core;
 import arc.graphics.g2d.*;
 import mindustry.world.Block;
-import mindustry.world.blocks.production.GenericCrafter;
 import sky.ctype.AutoMultiCrafter;
 
 public final class ForwardDrawRotator extends ForwardDrawBlock{
