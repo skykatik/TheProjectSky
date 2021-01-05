@@ -1,5 +1,6 @@
 package sky.ctype;
 
+import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.math.Mathf;
@@ -18,6 +19,13 @@ public class AutoMultiSmelter extends AutoMultiCrafter{
         super(name);
         ambientSound = Sounds.smelter;
         ambientSoundVolume = 0.07f;
+    }
+
+    @Override
+    public void load(){
+        super.load();
+
+        topRegion = Core.atlas.find(name + "-top");
     }
 
     public class AutoMultiSmelterBuild extends AutoMultiCrafter.MultiCrafterBuild{

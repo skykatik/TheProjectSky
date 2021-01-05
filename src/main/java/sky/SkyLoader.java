@@ -2,11 +2,9 @@ package sky;
 
 import arc.util.*;
 import arc.util.Log.LogLevel;
-import mindustry.Vars;
 import mindustry.ctype.ContentList;
 import mindustry.gen.*;
 import mindustry.mod.Mod;
-import mindustry.world.Tile;
 import sky.content.*;
 
 import static mindustry.Vars.*;

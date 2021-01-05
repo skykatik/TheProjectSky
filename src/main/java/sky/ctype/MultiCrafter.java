@@ -1,6 +1,5 @@
 package sky.ctype;
 
-import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.math.Mathf;
@@ -11,7 +10,6 @@ import arc.struct.EnumSet;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.content.*;
-import mindustry.core.UI;
 import mindustry.ctype.UnlockableContent;
 import mindustry.entities.*;
 import mindustry.gen.*;

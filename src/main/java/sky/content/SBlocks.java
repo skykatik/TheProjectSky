@@ -7,7 +7,7 @@ import mindustry.gen.Sounds;
 import mindustry.type.*;
 import mindustry.world.Block;
 import sky.ctype.*;
-import sky.draw.forward.ForwardDrawRotator;
+import sky.draw.forward.*;
 
 import static mindustry.type.ItemStack.with;
 

@@ -1,11 +1,7 @@
 package sky.content;
 
-import arc.graphics.Color;
-import mindustry.content.Planets;
 import mindustry.ctype.ContentList;
-import mindustry.graphics.g3d.HexMesh;
 import mindustry.type.Planet;
-import sky.generators.SkylandPlanetGenerator;
 
 public final class SPlanets implements ContentList{
     public static Planet

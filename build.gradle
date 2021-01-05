@@ -46,3 +46,16 @@ jar{
     archiveFileName = "${project.archivesBaseName}Desktop.jar"
     from{configurations.runtimeClasspath.collect{it.isDirectory() ? it : zipTree(it)}}
 }
+
+task deploy(type: Jar){
+    dependsOn jarAndroid
+    dependsOn jar
+    archiveFileName = "${project.archivesBaseName}.jar"
+
+    from{[zipTree("$buildDir/libs/${project.archivesBaseName}Desktop.jar"), zipTree("$buildDir/libs/${project.archivesBaseName}Android.jar")]}
+
+    doLast{
+        delete{ delete "$buildDir/libs/${project.archivesBaseName}Desktop.jar" }
+        delete{ delete "$buildDir/libs/${project.archivesBaseName}Android.jar" }
+    }
+}

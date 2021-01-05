@@ -23,6 +23,7 @@ public final class SItems implements ContentList{
 
         stone = new Item("stone", Accents.stone){{
             cost = 0.7f;
+            lowPriority = true;
         }};
 
         // // // //

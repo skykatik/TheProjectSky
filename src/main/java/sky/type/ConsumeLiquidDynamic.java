@@ -9,7 +9,7 @@ import mindustry.type.LiquidStack;
 import mindustry.ui.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.Stats;
-import sky.ctype.MultiCrafter;
+import sky.ctype.*;
 
 @SuppressWarnings("unchecked")
 public class ConsumeLiquidDynamic extends Consume{
@@ -78,9 +78,9 @@ public class ConsumeLiquidDynamic extends Consume{
 
     @Override
     public boolean valid(Building entity){
-        if(entity instanceof MultiCrafter.MultiCrafterBuild){
-            MultiCrafter.MultiCrafterBuild build = (MultiCrafter.MultiCrafterBuild)entity;
-            MultiCrafter multiCrafter = (MultiCrafter)entity.block;
+        if(entity instanceof AutoMultiCrafter.MultiCrafterBuild){
+            AutoMultiCrafter.MultiCrafterBuild build = (AutoMultiCrafter.MultiCrafterBuild)entity;
+            AutoMultiCrafter multiCrafter = (AutoMultiCrafter)entity.block;
             return build.currentPlan != -1 && !Structs.contains(multiCrafter.plans.get(build.currentPlan).liquidRequirements, stack -> build.liquids.get(stack.liquid) < stack.amount);
         }
         return entity.liquids != null && Structs.contains(liquids.get(entity), l -> entity.liquids.get(l.liquid) > l.amount);
