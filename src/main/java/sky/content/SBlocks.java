@@ -27,28 +27,29 @@ public final class SBlocks implements ContentList{
             requirements(Category.crafting, with(SItems.stone, 130));
             plans = Seq.with(
                     OutputPlan.create().itemStack(new ItemStack(SItems.tinIngot, 1)).itemRequirements(with(SItems.tinRaw, 4)).time(45f),
+                    OutputPlan.create().itemStack(new ItemStack(SItems.tinIngot, 2)).itemRequirements(with(SItems.tinDust, 6)).time(75f)
+            );
+            size = 2;
+            itemCapacity = 3;
+            hasPower = false;
+            hasLiquids = false;
+            craftEffect = Fx.pulverizeMedium;
+        }};
+
+        tinSmelter = new AutoMultiSmelter("tin-smelter"){{
+            requirements(Category.crafting, with(SItems.tinIngot, 30, SItems.tinPlate, 3, SItems.stone, 130));
+            plans = Seq.with(
+                    OutputPlan.create().itemStack(new ItemStack(SItems.tinIngot, 1)).itemRequirements(with(SItems.tinRaw, 4)).time(35f),
                     OutputPlan.create().itemStack(new ItemStack(SItems.tinIngot, 2)).itemRequirements(with(SItems.tinDust, 6)).time(65f)
             );
             size = 2;
-            itemCapacity = 3;
+            itemCapacity = 4;
             hasPower = false;
             hasLiquids = false;
             craftEffect = Fx.pulverizeMedium;
         }};
 
-        tinForge = new AutoMultiCrafter("tin-forge"){{
-            requirements(Category.crafting, with(SItems.stone, 260, SItems.tinIngot, 25, Items.copper, 50));
-            plans = Seq.with(
-                    OutputPlan.create().itemStack(new ItemStack(SItems.tinPlate, 1)).itemRequirements(with(SItems.tinIngot, 2)).time(65f)
-            );
-            size = 2;
-            itemCapacity = 3;
-            hasPower = false;
-            hasLiquids = false;
-            craftEffect = Fx.pulverizeMedium;
-        }};
-
-        tinForge = new AutoMultiCrafter("tin-crusher"){{
+        tinCrusher = new AutoMultiCrafter("tin-crusher"){{
             requirements(Category.crafting, with(SItems.stone, 150, SItems.tinIngot, 30, Items.copper, 30, Items.lead, 30));
             plans = Seq.with(
                     OutputPlan.create().itemStack(new ItemStack(SItems.tinDust, 2)).itemRequirements(with(SItems.tinRaw, 1)).time(65f),
@@ -63,6 +64,18 @@ public final class SBlocks implements ContentList{
             updateEffect = Fx.pulverizeSmall;
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
+        }};
+
+        tinForge = new AutoMultiCrafter("tin-forge"){{
+            requirements(Category.crafting, with(SItems.stone, 260, SItems.tinIngot, 25, Items.copper, 50));
+            plans = Seq.with(
+                OutputPlan.create().itemStack(new ItemStack(SItems.tinPlate, 1)).itemRequirements(with(SItems.tinIngot, 2)).time(65f)
+            );
+            size = 2;
+            itemCapacity = 3;
+            hasPower = false;
+            hasLiquids = false;
+            craftEffect = Fx.pulverizeMedium;
         }};
     }
 }

@@ -1,17 +1,24 @@
 package sky;
 
+import arc.Events;
+import arc.math.Mathf;
 import arc.util.*;
 import arc.util.Log.LogLevel;
+import mindustry.content.Fx;
 import mindustry.ctype.ContentList;
+import mindustry.game.EventType;
 import mindustry.gen.*;
 import mindustry.mod.Mod;
+import mindustry.world.blocks.liquid.Conduit;
 import sky.content.*;
 
 import static mindustry.Vars.*;
 
 public final class SkyLoader extends Mod{
-    private ContentList[] content = {
+    private final ContentList[] content = {
+            new SEfects(),
             new SItems(),
+            new SLiquids(),
             new SBlocks(),
             new SOres(),
             new SPlanets()
